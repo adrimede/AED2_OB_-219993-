@@ -52,9 +52,10 @@ public String mostrarInOrder(NodoAB<T> a){
 public String mostrarUsuario(Usuario a){
 	String z="";
     if (a!=null){
-         z=a.getEmail()+";";	   
-        return z;
+    	  z=a.getEmail()+";"+a.getNombre()+"|";
+    	  return z;
     }
+  	   
     return z;
 }
 

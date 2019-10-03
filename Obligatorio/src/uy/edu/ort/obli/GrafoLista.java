@@ -107,13 +107,13 @@ public class GrafoLista  {
 			while(i<listaAdyacencia.length && !esta)
 			{
 				
-				if(this.nodosUsados[i]==false){
+				if(this.nodosUsados[i]==null){
 					
 				//	Vertice ver=new 
 					
 					this.listaAdyacencia[i] = new Esquina(coordX,coordY);
 				
-	               this.nodosUsados[i]=true;
+	              // this.nodosUsados[i]=true;
 	               this.size ++;
 	             
 				   esta=true;
@@ -137,7 +137,7 @@ public class GrafoLista  {
 
 	public void eliminarArista(int posVertice,Arista a ) {
 	
-		this.listaAdyacencia[posVertice].getListaArista().borrar(a);                          //borrar(destino);                   
+		this.nodosUsados[posVertice].getListaArista().borrar(a);                          //borrar(destino);                   
 	}
 
 	public boolean esVacio() {
@@ -166,7 +166,9 @@ public class GrafoLista  {
 	public boolean estaVertice(int v) {
 		return this.nodosUsados[v];
 	}
-
+	public boolean sonAdyacentes(int a, int b) {
+		return this.nodosUsados[a].pertenece(b);
+	}
 	
 }
   

@@ -4,6 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import uy.edu.ort.obli.Retorno.Resultado;
+import uy.ort.ob201901.Retorno;
+import uy.ort.ob201901.Vertice;
 
 
 
@@ -51,7 +53,7 @@ public class Sistema implements ISistema {
 	        Matcher matherEmail = patternEmail.matcher(email);
 			
 			 if (matherEmail.find() == false) {
-		         System.out.println("Email invalido");
+		        
 		            return new Retorno(Resultado.ERROR_1);
 		        }
 		      	        
@@ -74,13 +76,11 @@ public class Sistema implements ISistema {
 		Matcher matherEmail = patternEmail.matcher(email);
 
 			if (matherEmail.find() == false) {
-					System.out.println("Email invalido");
+				
 						return new Retorno(Resultado.ERROR_1);
 					}
 		
-		
-		
-		
+
 		Usuario usu = (Usuario) listaUsuarios.Buscar(new Usuario(email)).getDato();   
 	       
 	    //   System.out.println(gest.getNombre()+";" +"\r\n" );	
@@ -145,7 +145,24 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarEsquina(double coordX, double coordY) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		/*
+		for(Vertice v : grafo.getListaAdyacencia())
+		{
+		
+		if(v!=null &&v.getCoordX()==coordX && v.getCoordY()==coordY) 
+		{
+			
+			return new Retorno(Resultado.ERROR_2);
+		}
+		
+		}
+		
+		
+	    grafo.agregarVerticeEsq(coordX,coordY);
+		
+		
+        return new Retorno(Resultado.OK);
+		*/
 	}
 
 	@Override

@@ -11,6 +11,15 @@ public class Monopatin extends Vertice {
 		this.chipId=chipId;
 		
 	}
+	
+
+	public Monopatin(String chipId,double coordX, double coordY) {
+		super(coordX, coordY);
+		
+		this.chipId=chipId;
+		
+	}
+
 
 
 	public String getChipId() {

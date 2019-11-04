@@ -7,4 +7,8 @@ public class Esquina extends Vertice {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Esquina(double coordX, double coordY) {
+		super(coordX, coordY);
+		// TODO Auto-generated constructor stub
+	}
 }

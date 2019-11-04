@@ -11,8 +11,8 @@ public interface ILista<T> extends Iterable<T> {
 	public void borrar(T dato);
 	
 	// Pre: existe(dato)
-		// Pos: Borra al elemento 'dato' de la lista
-		public void borrarPos(int dato);
+	// Pos: Borra al elemento 'dato' de la lista
+	public void borrarPos(int dato);
 
 	// Pre: !esVacia()
 	// Pos: Borra al primer elemento de la lista
@@ -28,7 +28,9 @@ public interface ILista<T> extends Iterable<T> {
 
 	// Pre:
 	// Pos: Retorna true si 'dato' está en la lista. False en caso contrario.
-	public boolean existe(T dato);
+	public boolean existe(int dato);
+	
+	public boolean existeG(T dato);
 
 	// Pre: existe(dato)
 	// Pos: retorna un elemento "igual" al pedido

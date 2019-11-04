@@ -87,11 +87,26 @@ public class ListaAdy<T> implements ILista<T> {
 	}
 
 	@Override
-	public boolean existe(T dato) {
+	public boolean existe(int b) {
 		boolean esta = false;
 		NodoLista<T> aux = inicio;
 		while(aux != null && !esta){
-			if(aux.getDato().equals(dato))
+			if(aux.getDato().equals(b))
+			{
+				esta = true;
+			} else {
+				aux = aux.getSig();
+			}
+		}
+		return esta;
+	}
+	
+	@Override
+	public boolean existeG(T b) {
+		boolean esta = false;
+		NodoLista<T> aux = inicio;
+		while(aux != null && !esta){
+			if(aux.getDato().equals(b))
 			{
 				esta = true;
 			} else {
@@ -138,6 +153,8 @@ public class ListaAdy<T> implements ILista<T> {
 		}
 		return null;
 	}
+
+	
 
 	
 

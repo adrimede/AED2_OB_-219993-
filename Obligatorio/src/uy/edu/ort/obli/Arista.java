@@ -36,6 +36,20 @@ public void setPeso(int peso) {
 	this.peso = peso;
 }
 
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Arista other = (Arista) obj;
+	if (posicion != other.posicion)
+		return false;
+	return true;
+}
+
 
 
 

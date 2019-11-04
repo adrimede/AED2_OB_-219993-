@@ -53,4 +53,7 @@ public class Vertice {
 	public void setEstados(Estado estados) {
 		this.estados = estados;
 	}
+
+
+
 }

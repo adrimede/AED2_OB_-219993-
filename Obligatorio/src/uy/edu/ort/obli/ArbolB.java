@@ -194,16 +194,20 @@ public int altura(NodoAB<T> n){
 }
 
 
-public NodoAB<T> Buscar(Object val){
-return Buscar(val,raiz);
+public NodoAB<T> Buscar(Object val,Entero contador){
+return Buscar(val,raiz,contador);
 }
 
-public NodoAB<T> Buscar(Object val,NodoAB<T> n){
-if(n==null)return null;
+public NodoAB<T> Buscar(Object val,NodoAB<T> n,Entero contador){
+contador.sumarUno();
+	if(n==null)return null;
 if(n.getDato().equals(val))return n;
-	NodoAB<T> nuevo=Buscar(val,n.getIzq());
-	if(nuevo!=null)return nuevo;	
-	return Buscar(val,n.getDer());
+
+if(((Usuario) n.getDato()).compareTo(val)<=0 )
+	return Buscar(val, n.getIzq(),contador);
+else
+return Buscar(val, n.getDer(),contador);
+
 }
 
 

@@ -22,9 +22,13 @@ public class Vertice {
 		
 	 public Vertice(double coordX, double coordY) {
 			super();
-			
+			listaArista=new ListaAdy<Arista>();
 			this.coordX = coordX;
 			this.coordY = coordY;
+		}
+	 
+	 public Vertice() {
+			
 		}
 	 
 	public ListaAdy<Arista> getListaArista() {
@@ -54,6 +58,9 @@ public class Vertice {
 		this.estados = estados;
 	}
 
-
+	public String toString (){
+		return getCoordX()+";"+ getCoordY();
+       
+    }
 
 }

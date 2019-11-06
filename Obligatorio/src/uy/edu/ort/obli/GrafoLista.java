@@ -1,8 +1,12 @@
 package uy.edu.ort.obli;
 
+import java.util.ArrayList;
+
+import uy.edu.ort.obli.Vertice.Estado;
 
 public class GrafoLista  {
 	
+	private static final Vertice[][] Vertice = null;
 	private int size;//la cantidad de nodos usados
 	private int cantNodos;//cantidad de nodos q contiene el array del grafo
 	private ListaAdy<Arista>[] listaAdyacencia;
@@ -163,32 +167,14 @@ public class GrafoLista  {
 		return this.nodosUsados[v]!=null;
 	}
 	
-	/*
-	public int costoCaminoMinimo(int vertOrig,int vertDest ){
-		int[] costo=new int[cantNodos];
-		boolean[] visitados = new boolean[cantNodos];
-		visitados[vertOrig]=true;
-		for(int i=0;i<cantNodos;i++){
-			
-			if(listaAdyacencia[vertOrig].existe(i)){
-		
-			costo[i]=listaAdyacencia[vertOrig].buscar(i).peso;//hacer metodo buscar
-			}else{
-				costo[i]=Integer.MAX_VALUE;
-			}
-					
-		}
-	}
 	
-*/
 	
-	 public Vertice[] monopatinesEnZona(double x, double y) {
+	 public ArrayList<Vertice>  monopatinesEnZona(int o) {
 		 
-	//	 Vertice[] listaMonopatines;
+		// Vertice[] listaMonopatines;
 		 
-		   
-		 
-		 int t = BuscarVertice(x,y);
+		 ArrayList<Vertice> listaMonopatines=new ArrayList<Vertice>() ;
+		// int t = BuscarVertice(x,y);
 		 
 		  int[] costo = new int[cantNodos+1];
 
@@ -200,28 +186,42 @@ public class GrafoLista  {
 
 	        for(int i=1; i<=cantNodos; i++){
 
-	            if (i!=x)
+	            if (i!=o)
 
 	                  costo[i]=Integer.MAX_VALUE;
 
 	        }
-	        costo[t] =  0;
-        	visitado[t] = true;
+	    //    costo[t] =  0;
+       // 	visitado[t] = true;
 	 	        for(int i=1; i<=cantNodos; i++){
 
 	            //vertice con la distancia mas corta no visitado
 
-	            int u = distanciaMasCorta(costo, visitado, x, y);
-
+	            int u = distanciaMasCorta(costo, visitado);
+               if(u!=-1) {
 	            visitado[u]=true;
-
+	         
+	          //  Vertice vert=  nodosUsados[u];
+	           if(u>=0)
+    	 	      // for(int p=0;p<costo.length;p++){
+    	 	    	  
+    	 	    	   if(costo[u]<=1000 ){
+    	 	    		  Vertice  vert=nodosUsados[u];
+    	 	    		//  listaMonopatines.
+    	 	    		listaMonopatines.add(vert);
+    	 	    		return listaMonopatines;
+    	 	    	//tengo q guardar los vertices 
+    	 	    	//   }
+    	 	    	   
+    	 	       }
+               
 	            for(int j=1; j<=cantNodos; j++){
-	            	
-	                  if(this.sonAdyacentes(u, j) && !visitado[j]){
+	            	  Vertice aux = nodosUsados[u];
+	                  if(aux.getListaArista().existe(j) && !visitado[j]){   // this.sonAdyacentes(u, j)
 
-	                    if(this.listaAdyacencia[u].recuperar(new Arista(j,0)).peso+costo[u]<costo[j]){//recuperar es como buscar
+	                    if(aux.getListaArista().recuperar(new Arista(j,0)).peso+costo[u]<costo[j]){//recuperar es como buscar
 
-	                        costo[j]=this.listaAdyacencia[u].recuperar(new Arista(j,0)).peso+costo[u];
+	                        costo[j]=aux.getListaArista().recuperar(new Arista(j,0)).peso+costo[u];
 
 	                        camino[j]=u;
 
@@ -231,60 +231,23 @@ public class GrafoLista  {
 
 	            }
 
-	        }	    
-	 	        Vertice[] listaMonopatines=null;
-	 	    
-	 	       for(int p=0;p<costo.length;p++){
-	 	    	  
-	 	    	   if(costo[p]<=1000  ){
-	 	    		   
-	 	    		  listaMonopatines =new Vertice[p];
-	 	    		 
-	 	    		//  listaMonopatines.
-	 	    		  
-	 	    	//tengo q guardar los vertices 
-	 	    	   }
-	 	    	   
-	 	       }
-		 
-		
-	 	       return listaMonopatines; 
-	 }
+	        }	 
+               
+	 	  }
+		/*
+		// Vertice vert=new Vertice[costo];
+		 ArrayList<Vertice> listaMonopatines=new ArrayList<Vertice>() ;
+		 int min=0;
+	        int[] costo = new int[cantNodos];
 
-	    
-	
-	
-	
-	
-	 private int BuscarVertice(double x, double y) {
-		 
-		 int encontrado = 0;
-		 
-		 
-		 for(int j=1; j<=nodosUsados.length; j++){
-			  if(nodosUsados[j].getCoordX()== x && nodosUsados[j].getCoordY() ==y ){
-				  
-				  encontrado=j; 
-			  }
-		  }
-		return encontrado;
-	}
+	        int[] camino = new int[cantNodos];
 
-	public int caminoMinimo(double o, double d)      
-
-	    {
-
-
-	        int[] costo = new int[cantNodos+1];
-
-	        int[] camino = new int[cantNodos+1];
-
-	        boolean[] visitado = new boolean[cantNodos+1];
+	        boolean[] visitado = new boolean[cantNodos];
 	      
 
 	        //Inicializo costos con valor INFINITO
 
-	        for(int i=1; i<=cantNodos; i++){
+	        for(int i=0; i<cantNodos; i++){
 
 	            if (i!=o)
 
@@ -292,23 +255,164 @@ public class GrafoLista  {
 	                  costo[i]=Integer.MAX_VALUE;
 
 	        }
-	    	
-	 	     for(int i=1; i<=cantNodos; i++){
+	        
+	 	     for(int i=0; i<cantNodos; i++){
 
 	            //vertice con la distancia mas corta no visitado
 
-	            int u = distanciaMasCorta(costo, visitado, o, d);
+	            int u = distanciaMasCorta(costo, visitado);
+	           if (u==-1){
+	          	return null;
+	         }
+	        visitado[u]=true;
+	            
+	        //    if (esMonopatin(u)){
+		           
+		    /*   
+	            Vertice vert=new Vertice();
+	            if(min>costo[u] && costo[u]<=1200)
+	            	min=costo[u];
+    	 	       for(int p=0;p<costo.length;p++){
+    	 	    	  
+    	 	    	   if(costo[p]<=1000 ){
+    	 	    		  vert=devolverVertice(p);
+    	 	    		//  listaMonopatines.
+    	 	    		listaMonopatines.add(vert);
+    	 	    		
+    	 	    	//tengo q guardar los vertices 
+    	 	    	   }
+    	 	    	   
+    	 	       }
+	        //    }
+	         //   if(costo[u]<=1000 ){
+	 	    		 
+	 	    		//  listaMonopatines.
+	          //  return costo[u];
+	 	    	//tengo q guardar los vertices 
+	 	    	//   }
+	         
+	            for(int j=0; j<cantNodos; j++){
+	            	Vertice aux = nodosUsados[u];
+	                  if(aux.getListaArista().existeG(new Arista(j,0)) && !visitado[j]){   // this.sonAdyacentes(u, j)
 
+
+	                    if(aux.getListaArista().recuperar(new Arista(j,0)).peso+costo[u]<costo[j]){//recuperar es como buscar
+
+	                        costo[j]=aux.getListaArista().recuperar(new Arista(j,0)).peso+costo[u];
+
+	                        camino[j]=u;
+	                        
+	                  
+	                     
+	                    }                     
+
+	                  }
+
+	            }
+
+	        }	
+	             *//*
+	 	    Vertice[] listaMonopatines = new Vertice[costo.length];
+	 	       for(int p=0;p<costo.length;p++){
+	 	    	  
+	 	    	   if(costo[p]<=1000 ){
+	 	    		 
+	 	    		//  listaMonopatines.
+	 	    		  listaMonopatines=new Vertice[p];
+	 	    	//tengo q guardar los vertices 
+	 	    	   }
+	 	    	   
+	 	       }
+	 	       
+	 	       
+	 	*/ /*
+	 	    Vertice vert=new Vertice();
+       
+	 	       for(int p=0;p<costo.length;p++){
+	 	    	  
+	 	    	   if(costo[p]<=1000 ){
+	 	    		  vert=devolverVertice(p);
+	 	    		//  listaMonopatines.
+	 	    		listaMonopatines.add(vert);
+	 	    		
+	 	    	//tengo q guardar los vertices 
+	 	    	   }
+	 	    	   
+	 	       }
+		 */
+		 return  null; //listaMonopatines; 
+	 }
+
+	    
+	
+	
+	
+	
+	 private Vertice devolverVertice(int vertPos) {
+		 
+		 Vertice encontrado = new Vertice();
+		 
+		 
+		 for(int j=1; j<=nodosUsados.length; j++){
+			  if(j==vertPos){
+				  
+				  encontrado=nodosUsados[j]; 
+			  }
+		  }
+		return encontrado;
+		
+		
+	}
+
+	 
+	 
+	 
+	 
+	public int caminoMinimo(int o)      
+
+	    {
+
+
+	        int[] costo = new int[cantNodos];
+
+	        int[] camino = new int[cantNodos];
+
+	        boolean[] visitado = new boolean[cantNodos];
+	      
+
+	        //Inicializo costos con valor INFINITO
+
+	        for(int i=0; i<cantNodos; i++){
+
+	            if (i!=o)
+
+	            
+	                  costo[i]=Integer.MAX_VALUE;
+
+	        }
+	        
+	 	     for(int i=0; i<cantNodos; i++){
+
+	            //vertice con la distancia mas corta no visitado
+
+	            int u = distanciaMasCorta(costo, visitado);
+	            if (u==-1){
+	            	return -1;
+	            }	
+	            	
 	            visitado[u]=true;
 	            
+	           if (esMonopatin(u)){
+	           	return costo[u];
+	          }
+	            for(int j=0; j<cantNodos; j++){
+	            	Vertice aux = nodosUsados[u];
+	                  if(aux.getListaArista().existeG(new Arista(j,0)) && !visitado[j]){   // this.sonAdyacentes(u, j)
 
-	            for(int j=1; j<=cantNodos; j++){
-	            	
-	                  if(this.sonAdyacentes(u, j) && !visitado[j]){
 
-	                    if(this.listaAdyacencia[u].recuperar(new Arista(j,0)).peso+costo[u]<costo[j]){//recuperar es como buscar
+	                    if(aux.getListaArista().recuperar(new Arista(j,0)).peso+costo[u]<costo[j]){//recuperar es como buscar
 
-	                        costo[j]=this.listaAdyacencia[u].recuperar(new Arista(j,0)).peso+costo[u];
+	                        costo[j]=aux.getListaArista().recuperar(new Arista(j,0)).peso+costo[u];
 
 	                        camino[j]=u;
 
@@ -320,12 +424,32 @@ public class GrafoLista  {
 
 	        }	     
 
-	        return costo[(int) d];
+	        return -1;
 
 	    }
-	 
+	
+	private boolean esMonopatin(int vert) {
+
+boolean esMonopatin=false;
+		 for(int i=0;i<nodosUsados.length;i++){
+			 
+			 if(i==vert && (nodosUsados[i] instanceof Monopatin)){			
+				
+					 esMonopatin=true;
+		 
+			 }
+		 
+			 
+		 }
+		 
+		 return esMonopatin;
+	
+	}
+	
+	
+	
 	 //DEVUELVE EL VERTICE CON LA DISTANCIA MAS CORTA SIN VISITAR CON MENOS COSTO
-	private int distanciaMasCorta(int[] costo, boolean[] visitado, double o, double d) {
+	private int distanciaMasCorta(int[] costo, boolean[] visitado) {
 		 int min =Integer.MAX_VALUE;
 		 int vertice =-1;
 		 
